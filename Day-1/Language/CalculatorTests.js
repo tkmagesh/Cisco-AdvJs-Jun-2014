@@ -76,6 +76,16 @@ window.addEventListener("DOMContentLoaded",function(){
 		//assert
 		return result === expectedResult;
 	});
+	test("Should be able to treat non numeric strings as 0", function(){
+		//arrange
+		var n1 = "a", n2 = "b", expectedResult = 0;
+
+		//act
+		var result = add(n1,n2);
+
+		//assert
+		return result === expectedResult;
+	});
 	test("Should be able to add arbitraray length of numbers", function(){
 		//arrange
 		var expectedResult = 100;
