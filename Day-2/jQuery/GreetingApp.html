@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Greeting App</title>
+	<style>
+	.error{
+		color : red;
+		font-style: italic;
+	}
+	.invalid{
+		border: 1px solid red;
+		background-color: lightpink;
+
+	}
+	</style>
+	<script src="jquery-1.11.1.js"></script>
+	<script>
+	(function(window,document,undefined){
+		
+		$(function init(){
+			$("#btnGreet").click(onBtnGreetClick);
+			$(".error").hide();
+			$("#txtName").blur(function(){
+				var $this = $(this);
+				if ($this.val() === ""){
+					$this.addClass("invalid").next("span.error").show();
+				} else {
+					$this.removeClass("invalid").next("span.error").hide();
+				}
+			})
+		});
+
+		function onBtnGreetClick(){
+			var $txtName = $("#txtName");
+			var name = $txtName.val();
+			if (name !== ""){
+				var greetMsg = "Hi " + name + ", Have a nice day!!";
+				$("#divMessage").html(greetMsg).show().delay(4000).fadeOut();
+			}
+		}
+	})(window,document)
+	</script>
+</head>
+<body>
+	<h1>Greeting App</h1>
+	<hr>
+	<span>Name :</span>
+	<input type="text" name="" id="txtName">
+	<span class="error">* Name is mandatory</span> <br>
+	<input type="button" value="Greet" id="btnGreet">
+	<div id="divMessage"></div>
+</body>
+</html>
