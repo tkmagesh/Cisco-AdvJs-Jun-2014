@@ -7,13 +7,51 @@ var products = [
 	{id:1, name:"zen", cost:10, units:60, category:1}
 ]	
 
-function sort(){
-   for(var i=0;i<products.length-1;i++)
-      for(var k=i+1;k<products.length;k++){
-            var left = products[i], right = products[k];
-            if (left.id > right.id){
-                products[i] = products[k];
-                products[k] = left;
+function sort(list,attrName){
+   for(var i=0;i<list.length-1;i++)
+      for(var j=i+1;j<list.length;j++){
+            var left = list[i], right = list[j];
+            if (left[attrName] > right[attrName]){
+                list[i] = list[j];
+                list[j] = left;
             }
       }
 }
+
+function sort(list,comparerFn){
+	/*comparerFn => function(o1,o2) returning 1 if o1 > o2, 0 if o1 = o2, -1 if o1 < o2 */
+   for(var i=0;i<list.length-1;i++)
+      for(var j=i+1;j<list.length;j++){
+            var left = list[i], right = list[j];
+            if (comparerFn(left,right) > 0){
+                list[i] = list[j];
+                list[j] = left;
+            }
+      }
+}
+
+function sort(list,comparer){
+	/*comparerFn => function(o1,o2) returning 1 if o1 > o2, 0 if o1 = o2, -1 if o1 < o2 */
+	var comparerFn = comparer;
+	if (typeof comparer === "string"){
+		comparerFn = function(o1,o2){
+			return o1[comparer] > o2[comparer] ? 1 : (o1[comparer] < o2[comparer] ? -1 : 0);
+		}
+	}
+   for(var i=0;i<list.length-1;i++)
+      for(var j=i+1;j<list.length;j++){
+            var left = list[i], right = list[j];
+            if (comparerFn(left,right) > 0){
+                list[i] = list[j];
+                list[j] = left;
+            }
+      }
+}
+
+min
+max
+avg
+filter
+groupBy
+
+
